@@ -1,4 +1,4 @@
-package com.vho.microservices.product;
+package com.vho.microservices.productservice;
 
 import org.springframework.boot.SpringApplication;
 
