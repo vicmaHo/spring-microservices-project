@@ -4,6 +4,7 @@
 
 
 data/
+mysql/
 .mvn
 
 ### STS ###
