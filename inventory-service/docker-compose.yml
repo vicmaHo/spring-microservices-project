@@ -2,11 +2,11 @@ version: '4'
 services:
   mysql:
    image: mysql:8.3.0
-   container_name: mysql
+   container_name: inventory-mysql
    environment:
     MYSQL_ROOT_PASSWORD: mysql
    ports:
-    - "3307:3306"
+    - "3308:3306"
    volumes:
     - ./mysql:/var/lib/mysql
     # docker-entrypoint es  el comando que se ejecuta cuando el contenedor este andando, lo uso para ejecutar el SQL de inicializacion
