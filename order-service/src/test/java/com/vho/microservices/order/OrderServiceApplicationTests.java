@@ -7,13 +7,19 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
+import org.springframework.cloud.contract.wiremock.AutoConfigureWireMock;
 import org.springframework.context.annotation.Import;
+import org.springframework.test.context.TestPropertySource;
 import org.testcontainers.containers.MySQLContainer;
+
+import com.vho.microservices.order.stubs.InventoryClientStub;
 
 import io.restassured.RestAssured;
 
 @Import(TestcontainersConfiguration.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@AutoConfigureWireMock(port = 0) // anotacion para las clases de testeo que van a iniciar un server de wiremock (puerto random = 0)
+@TestPropertySource(locations = "classpath:application.properties")
 class OrderServiceApplicationTests {
 
     @ServiceConnection
@@ -36,11 +42,13 @@ class OrderServiceApplicationTests {
     void shouldCreateOrder() {
         String submitOrderJson = """
                 {
-                 "skuCode": "samsung s22", 
+                 "skuCode": "pen", 
                  "price": 2000000,
                  "quantity": 1
                 }
                 """;
+        
+        InventoryClientStub.stubInventoryCall("pen", 1);
 
         var responseBodyString = RestAssured.given()
                 .contentType("application/json")
