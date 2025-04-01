@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @SpringBootApplication
-@EnableFeignClients // Con esta anotacion se configuran de forma automatica las clases necesarias para usar openFeign
+//@EnableFeignClients // Con esta anotacion se configuran de forma automatica las clases necesarias para usar openFeign
 public class OrderServiceApplication {
 
 	public static void main(String[] args) {
